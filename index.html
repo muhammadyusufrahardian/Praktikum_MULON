@@ -14,7 +14,48 @@
     <!--
 	The Town
 	https://templatemo.com/tm-525-the-town
-	-->
+  -->
+  <style>
+    .dropbtn {
+      background-color: #80000000;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #80000000;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content a:hover {background-color:#80000000}
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+      background-color: #80000000;
+    }
+    </style>
   </head>
   <body>    
     <!-- Hero section -->
@@ -25,18 +66,21 @@
           <div class="tm-next">
               <a href="#hero" class="navbar-brand">Muhammad Yusuf Rahardian (1800016005)</a>
           </div>             
-            
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars navbar-toggler-icon"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                  <a class="nav-link tm-nav-link" href="https://github.com/muhammafyusuf">Our Work</a>
-              </li>
-                            
-            </ul>
-          </div>        
+          <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+            <a href="https://muhammafyusuf.github.io/Praktikum_MULON/">praktikum 1</a>
+            <a href="#">praktikum 2</a>
+            <a href="#">praktikum 3</a>
+            <a href="#">praktikum 4</a>
+            <a href="#">praktikum 5</a>
+            <a href="#">praktikum 6</a>
+            <a href="#">praktikum 7</a>
+            <a href="#">praktikum 8</a>
+            <a href="#">praktikum 9</a>
+            <a href="#">praktikum 10</a>
+            </div>
+          </div> 
         </div>
       </nav>
       
@@ -61,7 +105,13 @@
     
 
    
-     
+      <footer class="text-center small tm-footer">
+          <p class="mb-0">
+            Copyright &copy; 2020 Rahardians 
+            
+            - Design: <a rel="nofollow" href="https://templatemo.com" class="tm-footer-link">dian</a>
+          </p>
+        </footer>
     </section>
     <script src="js/jquery-1.9.1.min.js"></script>     
     <script src="slick/slick.min.js"></script>
