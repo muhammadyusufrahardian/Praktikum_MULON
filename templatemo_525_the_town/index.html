@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MULTIMEDIA ONLINE</title>
+    <link rel="stylesheet"href="main.css" type="text/css" media="all"></linkrel>
+    <style type="text/css">
+    #canvas{
+        background-color: rgb(147, 197, 238);
+    }
+    .camera {
+       
+        height: 130px;
+width: 100px;
+position: absolute;
+top: 50px;
+left:10%;
+transform: translateX(-50%);
+
+    }
+    .canvas-container{
+      height: 130px;
+width: 100px;
+position: absolute;
+top: 50px;
+left: 40%;
+transform: translateX(-50%);
+    } 
+    .image-container{
+      height: 130px;
+width: 100px;
+position: absolute;
+top: 50px;
+left: 70%;
+transform: translateX(-50%);
+
+    }
+    
+    </style>
+    <link rel="stylesheet" href="fontawesome-5.5/css/all.min.css" />
+    <link rel="stylesheet" href="slick/slick.css">
+    <link rel="stylesheet" href="slick/slick-theme.css">
+    <link rel="stylesheet" href="magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/templatemo-style.css" />
+    <!--
+	The Town
+	https://templatemo.com/tm-525-the-town
+  -->
+  <section id="hero" class="text-white tm-font-big tm-parallax">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md tm-navbar" id="tmNav">              
+      <div class="container">   
+        <div class="tm-next">
+            <a href="#" class="navbar-brand2">Muhammad Yusuf Rahardian (1800016005)</a>
+        </div>             
+      
+      </div>
+    </nav>
+
+  </head>
+  <body onload="startup()" onload="startApp()">    
+    <!-- Hero section -->
+  
+
+   
+        <div class="camera">
+            <h3>Video Steraming</h3>
+            <video id="video">Video stream not available.</video>
+            <div>
+                <button id="startbutton">Take photo</button>
+            </div>
+        </div>
+        <div class="canvas-container">
+            <h3>Canvas Image</h3>
+            <canvas id="canvas"></canvas>
+        </div>
+        <div class="image-container">
+            <h3>Regular HTML Image</h3>
+            <div class="output">
+                <img id="photo"alt="The screen capture will appear in this box.">
+            </div>
+        </div>
+        <script type="text/javascript">
+        var width = 400;
+        var height = 0;
+        var streaming = false;
+
+        var video = null;
+        var canvas = null;
+        var photo = null;
+        var startbutton = null;
+        function startup() {
+            video = document.getElementById('video');
+            canvas = document.getElementById('canvas');
+            photo = document.getElementById('photo');
+            startbutton = document.getElementById('startbutton');
+
+            navigator.mediaDevices.getUserMedia({video: true, audio: false})
+            .then(function(stream) {
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function(err) {
+                console.log("An error occurred: "+ err);
+            });
+            video.addEventListener('canplay', function(ev){
+                if(!streaming) {
+                    height = video.videoHeight / (video.videoWidth/width);
+                    if(isNaN(height)) {
+                        height = width / (4/3);
+                    }
+                    video.setAttribute('width', width);
+                    video.setAttribute('height', height);
+                    canvas.setAttribute('width', width);
+                    canvas.setAttribute('height', height);
+                    streaming = true;
+                }
+            }, false);
+            startbutton.addEventListener('click', function(ev){
+                takepicture();
+                ev.preventDefault();
+            }, false);
+            clearphoto();
+        }
+        function clearphoto() {
+            var context = canvas.getContext('2d');
+            context.fillStyle = "#AAA";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            var data = canvas.toDataURL('image/png');
+            photo.setAttribute('src', data);
+        }
+        function takepicture() {
+            var context = canvas.getContext('2d');
+            if(width && height) {
+                canvas.width = width;canvas.height = height;
+                var cropStartX=0,
+                cropStartY=0,
+                cropWidth=400,
+                cropHeight=400,
+                imageX=100,
+                imageY=100,
+                imageWidth=100,
+                imageHeight=100;
+                context.drawImage(video, cropStartX,
+                cropStartY,cropWidth,cropHeight,imageX,imageY, imageWidth, imageHeight);    
+                var data = canvas.toDataURL('image/png');
+                photo.setAttribute('src', data);
+            } else{
+                clearphoto();
+                }
+             }
+                </script>
+    
+
+   
+  </body>
+</html>
