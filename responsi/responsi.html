@@ -1,0 +1,103 @@
+<html>
+<head>
+ <title> burung pipa</title>
+ <style>
+  canvas {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      background-color: rgba(155, 53, 219, 0.514);
+  }
+  h2{
+    position: center;
+     color: rgb(255, 255, 255);
+     font-size: xx-large;
+  }
+  </style>
+</head>
+<center><h2>burung pipa</h2></center>
+<body>
+  <body background = "gambar.jpg">
+ <canvas width="500" height="500" id="canv">
+ </canvas>
+ <input type="submit"  value="Mulai ulang?" onClick="document.location.reload(true)">
+ <script>
+  var y = 200;
+  var x = 200;
+  var vy = 0;
+  var kecepatanpipa = 2;
+  var menang = true;
+window.addEventListener('click',kontrolmouse,false);
+
+  
+   pipa = [
+   [400, Math.floor(Math.random() * 150) + 50, 0], //antara 50-200
+   [500, Math.floor(Math.random() * 150) + 50, 0],
+   [600, Math.floor(Math.random() * 150) + 50, 0],
+   [700, Math.floor(Math.random() * 150) + 50, 0],
+   [800, Math.floor(Math.random() * 150) + 50, 0],
+   [300, Math.floor(Math.random() * 150) + 50, 0], //antara 50-200
+   [400, Math.floor(Math.random() * 150) + 50, 0],
+   [200, Math.floor(Math.random() * 150) + 50, 0],
+   [500, Math.floor(Math.random() * 150) + 50, 0],
+   [800, Math.floor(Math.random() * 150) + 50, 0]
+   ];
+
+  canv=document.getElementById("canv");
+  ctx=canv.getContext("2d");
+  setInterval(game, 1000/30);
+
+  function game(){
+   ctx.clearRect(0,0,canv.width,canv.height); //menghapus semua isi canvas
+   vy += 1;
+   y += vy;
+
+   var image = new Image();
+   image.src="copy_833102683.png";
+   ctx.drawImage(image, x, y,40,40);
+
+   for(i = 0;i<5;i++)
+   {
+    //MEMBUAT PIPA
+    ctx.fillStyle="grey";
+    ctx.fillRect(pipa[i][0],0,50,pipa[i][1]); //pipa atas
+    ctx.fillStyle="grey";
+    ctx.fillRect(pipa[i][0],pipa[i][1] + 150, 50, 250 - pipa[i][1]); //pipa bawah
+
+    //cek jika burung terkena pipa
+    if(pipa[i][0] < 240 && pipa[i][0] > 160 && (pipa[i][1] > y || pipa[i][1] + 150 <= y + 30))
+    {
+     alert("Burung medabrak.. ohhh ! Anda kalah.. ! main lagi?");
+     location.reload()
+    }
+
+    //MENYETTING KOORDINAT X PADA PIPA
+    if(pipa[i][0] > -20) //jika masih terlihat di map
+    {
+     pipa[i][0] -= kecepatanpipa;
+    }
+    else if(pipa[i][0] == -20)  //jika sudah tidka terlihat, maka pindah pipa ke kanan
+    {
+     //pindah posisi
+     pipa[i][0] = 450;
+    }
+   }
+
+   if(y > 400)
+   {
+    vy = -10
+   }
+  }
+
+  function kontrolmouse(evt) //pemilihan menu
+  {
+   vy = -10;
+  }
+  function reloadpage()
+{
+location.reload()
+}
+ </script>
+</body>
+
+</html>
